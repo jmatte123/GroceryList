@@ -1,4 +1,4 @@
-package com.example.joematte.grocerylist.data;
+package com.example.joemattes.grocerylist.data;
 
 import android.net.Uri;
 import android.provider.BaseColumns;

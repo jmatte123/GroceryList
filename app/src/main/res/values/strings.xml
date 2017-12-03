@@ -3,7 +3,7 @@
     <string name="app_name">GroceryList</string>
 
     <!--Title of the MainActivity-->
-    <string name="mainactiviy_title">List</string>
+    <string name="mainactiviy_title">My List</string>
 
     <!--Title of the AddItemActivity-->
     <string name="additemactivity_title">Add Item</string>
@@ -13,11 +13,13 @@
 
     <!--Layout Strings-->
         <!--activity_add_item Strings-->
-        <string name="edit_text_name">Name</string>
+    <string name="edit_text_name">Name</string>
     <string name="discription_produce">Produce</string>
     <string name="discription_meat">Meat</string>
     <string name="discription_dariy">Dairy</string>
     <string name="discription_frozen">Frozen</string>
     <string name="discription_grocery">Grocery</string>
-    <string name="discription_extra">Extra</string>
+    <string name="discription_other">Other</string>
+
+    <string name="delete">delete</string>
 </resources>
