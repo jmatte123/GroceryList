@@ -32,7 +32,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     private Context mContext;
     private Cursor mCursor;
     private ArrayList<Item> mData = null;
-    private List<RecyclerView.ViewHolder> checkedHolders;
+    private ArrayList<ItemViewHolder> viewHolders = new ArrayList<>();
 
     /**
      * Constructor for the ItemAdapter
@@ -52,7 +52,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_layout, parent, false);
-        return new ItemViewHolder(view);
+        ItemViewHolder viewHolder = new ItemViewHolder(view);
+        viewHolders.add(viewHolder);
+        return viewHolder;
     }
 
     /**
@@ -62,10 +64,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
      */
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
-        int idIndex = mCursor.getColumnIndex(ItemContract.ItemEntry._ID);
-        mCursor.moveToPosition(position);
-        final int id = mCursor.getInt(idIndex);
-        holder.itemView.setTag(id);
         Item item = mData.get(position);
         holder.mName.setText(item.getName().toString());
         holder.mArea.setText(getAreaCode(item.getArea().toString()));
@@ -167,11 +165,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     /**
-     * get the data from the adapter
-     * @return the data
+     * get the viewHolders in the recyclerView so that it can tell which holders are checked
+     * @return viewHolders
      */
-    public ArrayList<Item> getmData() {
-        return mData;
+    public List<ItemViewHolder> getViewHolders() {
+        return viewHolders;
     }
 
     /**
@@ -202,6 +200,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             mArea = itemView.findViewById(R.id.tv_area);
             mImageView = itemView.findViewById(R.id.iv_area_color);
             mCheckBox = itemView.findViewById(R.id.checkBox);
+        }
+
+        /**
+         * get the name to compare it to the database
+         * @return mName
+         */
+        public String getmName() {
+            return mName.getText().toString();
         }
     }
 }

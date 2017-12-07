@@ -25,6 +25,8 @@ import com.example.joemattes.grocerylist.data.Item;
 import com.example.joemattes.grocerylist.data.ItemContract;
 import com.example.joemattes.grocerylist.data.ItemDbHelper;
 
+import java.util.ArrayList;
+
 /**
  * Created by joematte on 9/3/17.
  */
@@ -60,27 +62,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         fab.setImageResource(R.drawable.ic_add_black);
 
         getSupportLoaderManager().initLoader(ITEM_LOADER_ID, null, this);
-
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.DOWN) {
-
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int id = (int) viewHolder.itemView.getTag();
-
-                ItemDbHelper dbHelper = new ItemDbHelper(MainActivity.this);
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-                String selection = ItemContract.ItemEntry._ID + " = " + String.valueOf(id);
-                db.delete(ItemContract.ItemEntry.TABLE_NAME, selection, null);
-                getSupportLoaderManager().restartLoader(ITEM_LOADER_ID, null, MainActivity.this);
-            }
-        }).attachToRecyclerView(mRecyclerView);
     }
 
     /**
@@ -100,15 +81,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
      * @param item the delete button because its the only one
      * @return true if the delete button was clicked
      */
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.getItemId() == R.id.delete) {
-//            for (Item item : mAdapter.getmData()) {
-//                if (item.)
-//            }
-//        } else
-//            return false;
-//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.delete) {
+            ItemDbHelper dbHelper = new ItemDbHelper(MainActivity.this);
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            for (ItemAdapter.ItemViewHolder viewHolder : mAdapter.getViewHolders()) {
+                if (viewHolder.mCheckBox.isChecked()) {
+                    String selection = ItemContract.ItemEntry.COLUMN_NAME + " = " + "\'" + viewHolder.getmName() + "\'";
+                    db.delete(ItemContract.ItemEntry.TABLE_NAME, selection, null);
+                }
+            }
+            getSupportLoaderManager().restartLoader(ITEM_LOADER_ID, null, MainActivity.this);
+            return true;
+        } else
+            return false;
+    }
 
     /**
      * This method gets called when the user clicks the add Item button

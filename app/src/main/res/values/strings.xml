@@ -1,9 +1,7 @@
 <resources version="1.0" encoding="UTF-8">
     <!--Name of the app-->
-    <string name="app_name">GroceryList</string>
-
     <!--Title of the MainActivity-->
-    <string name="mainactiviy_title">My List</string>
+    <string name="mainactiviy_title">Shopist</string>
 
     <!--Title of the AddItemActivity-->
     <string name="additemactivity_title">Add Item</string>
