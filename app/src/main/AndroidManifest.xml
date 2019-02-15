@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.joemattes.grocerylist">
+    package="com.joemattes.grocerylist">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.joemattes.grocerylist.MainActivity"
+            android:name="com.joemattes.grocerylist.MainActivity"
             android:label="@string/mainactiviy_title"
             android:theme="@style/AppTheme"
             android:launchMode="singleTop"
@@ -22,14 +22,14 @@
         </activity>
 
         <activity
-            android:name="com.example.joemattes.grocerylist.AddItemActivity"
-            android:parentActivityName="com.example.joemattes.grocerylist.MainActivity"
+            android:name="com.joemattes.grocerylist.AddItemActivity"
+            android:parentActivityName="com.joemattes.grocerylist.MainActivity"
             android:label="@string/additemactivity_title"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.joemattes.grocerylist.MainActivity" />
+                android:value="com.joemattes.grocerylist.MainActivity" />
         </activity>
     </application>
 

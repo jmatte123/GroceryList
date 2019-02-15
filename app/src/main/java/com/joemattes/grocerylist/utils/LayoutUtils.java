@@ -1,11 +1,11 @@
-package com.example.joemattes.grocerylist.utils;
+package com.joemattes.grocerylist.utils;
 
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 
-import com.example.joemattes.grocerylist.R;
+import com.joemattes.grocerylist.R;
 
 /**
  * Created by joematte on 9/2/17.

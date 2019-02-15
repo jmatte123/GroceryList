@@ -1,4 +1,4 @@
-package com.example.joemattes.grocerylist.data;
+package com.joemattes.grocerylist.data;
 
 /**
  * Created by joematte on 9/7/17.

@@ -1,4 +1,4 @@
-package com.example.joemattes.grocerylist;
+package com.joemattes.grocerylist;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,9 +13,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.example.joemattes.grocerylist.R;
-import com.example.joemattes.grocerylist.data.ItemContract;
-import com.example.joemattes.grocerylist.data.ItemDbHelper;
+import com.joemattes.grocerylist.R;
+import com.joemattes.grocerylist.data.ItemContract;
+import com.joemattes.grocerylist.data.ItemDbHelper;
 
 /**
  * Created by joematte on 9/3/17.
