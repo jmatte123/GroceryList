@@ -12,7 +12,6 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.joemattes.grocerylist.R;
 import com.example.joemattes.grocerylist.data.Item;
 import com.example.joemattes.grocerylist.data.ItemContract;
 
@@ -67,7 +66,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         Item item = mData.get(position);
         holder.mName.setText(item.getName().toString());
         holder.mArea.setText(getAreaCode(item.getArea().toString()));
-        holder.mCheckBox.setChecked(false);
+        holder.mCheckBox.setChecked(Boolean.valueOf(item.getChecked()));
         Drawable areaColor = getColorFromItemArea(item.getArea().toString());
         holder.mImageView.setImageDrawable(areaColor);
     }
@@ -141,22 +140,28 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 String area = mCursor.getString(mCursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_AREA));
                 if (count == 0 && area.equalsIgnoreCase("produce")){
                     String name = mCursor.getString(mCursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_NAME));
-                    mData.add(new Item(name, area));
+                    String checked = mCursor.getString(mCursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_CHECKED));
+                    mData.add(new Item(name, area, Boolean.valueOf(checked)));
                 } else if (count == 1 && area.equalsIgnoreCase("Meat")){
                     String name = mCursor.getString(mCursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_NAME));
-                    mData.add(new Item(name, area));
+                    String checked = mCursor.getString(mCursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_CHECKED));
+                    mData.add(new Item(name, area, Boolean.valueOf(checked)));
                 } else if (count == 2 && area.equalsIgnoreCase("Dairy")){
                     String name = mCursor.getString(mCursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_NAME));
-                    mData.add(new Item(name, area));
+                    String checked = mCursor.getString(mCursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_CHECKED));
+                    mData.add(new Item(name, area, Boolean.valueOf(checked)));
                 } else if (count == 3 && area.equalsIgnoreCase("Frozen")){
                     String name = mCursor.getString(mCursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_NAME));
-                    mData.add(new Item(name, area));
+                    String checked = mCursor.getString(mCursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_CHECKED));
+                    mData.add(new Item(name, area, Boolean.valueOf(checked)));
                 } else if (count == 4 && area.equalsIgnoreCase("Grocery")){
                     String name = mCursor.getString(mCursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_NAME));
-                    mData.add(new Item(name, area));
+                    String checked = mCursor.getString(mCursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_CHECKED));
+                    mData.add(new Item(name, area, Boolean.valueOf(checked)));
                 } else if (count == 5 && area.equalsIgnoreCase("Other")){
                     String name = mCursor.getString(mCursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_NAME));
-                    mData.add(new Item(name, area));
+                    String checked = mCursor.getString(mCursor.getColumnIndexOrThrow(ItemContract.ItemEntry.COLUMN_CHECKED));
+                    mData.add(new Item(name, area, Boolean.valueOf(checked)));
                 }
             }
             mCursor.moveToPosition(-1);
@@ -208,6 +213,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
          */
         public String getmName() {
             return mName.getText().toString();
+        }
+
+        public Boolean getCheckBox(){
+            return mCheckBox.isChecked();
         }
     }
 }

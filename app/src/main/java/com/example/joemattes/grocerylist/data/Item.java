@@ -12,6 +12,7 @@ public class Item {
     // --- Fields --- //
     private String name;
     private String area;
+    private Boolean checked;
 
     /**
      * get the name of the item
@@ -30,12 +31,19 @@ public class Item {
     }
 
     /**
+     * get the checked boolean of the item
+     * @return checked
+     */
+    public Boolean getChecked() {return checked;}
+
+    /**
      * creates a new item object
      * @param name the name of the item
      * @param area the area of the item
      */
-    public Item(String name, String area){
+    public Item(String name, String area, Boolean checked){
         this.name = name;
         this.area = area;
+        this.checked = checked;
     }
 }

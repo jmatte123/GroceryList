@@ -15,13 +15,14 @@ public class ItemDbHelper extends SQLiteOpenHelper {
 
     // --- Fields --- //
     public static final String DATABASE_NAME = "itemdatabase.db";
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
 
     //create database
     private static final String CREATE_DATABASE_SQL_COMMAND = "CREATE TABLE " + ItemContract.ItemEntry.TABLE_NAME
             + "(" + ItemContract.ItemEntry._ID + " INTEGER PRIMARY KEY, "
             + ItemContract.ItemEntry.COLUMN_NAME + " VARCHAR(255) NOT NULL, "
-            + ItemContract.ItemEntry.COLUMN_AREA + " VARCHAR(255) NOT NULL)";
+            + ItemContract.ItemEntry.COLUMN_AREA + " VARCHAR(255) NOT NULL,"
+            + ItemContract.ItemEntry.COLUMN_CHECKED + " BOOLEAN NOT NULL)";
 
     //remove and update database
     private static final String DELETE_TABLE_FOR_UPGRADE = "DROP TABLE IF EXISTS " +

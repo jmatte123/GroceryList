@@ -1,6 +1,5 @@
 package com.example.joemattes.grocerylist.data;
 
-import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
@@ -30,6 +29,7 @@ public class ItemContract {
          */
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_AREA = "area";
+        public static final String COLUMN_CHECKED = "checked";
 
     }
 }

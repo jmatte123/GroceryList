@@ -1,9 +1,9 @@
 package com.example.joemattes.grocerylist;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
@@ -14,18 +14,13 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.joemattes.grocerylist.R;
-import com.example.joemattes.grocerylist.data.Item;
 import com.example.joemattes.grocerylist.data.ItemContract;
 import com.example.joemattes.grocerylist.data.ItemDbHelper;
-
-import java.util.ArrayList;
 
 /**
  * Created by joematte on 9/3/17.
@@ -52,16 +47,38 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView);
+        mRecyclerView = findViewById(R.id.RecyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new ItemAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setImageResource(R.drawable.ic_add_black);
 
         getSupportLoaderManager().initLoader(ITEM_LOADER_ID, null, this);
+    }
+
+    /**
+     * This method will be called when the user goes away from the activity.
+     *
+     * This purpose of this method is to update the database for items that are checked in the recyclerView.
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ItemDbHelper dbHelper = new ItemDbHelper(MainActivity.this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        for (ItemAdapter.ItemViewHolder viewHolder : mAdapter.getViewHolders()) {
+            if (viewHolder.mCheckBox.isChecked()) {
+                String update = "UPDATE " + ItemContract.ItemEntry.TABLE_NAME + " SET "
+                        + ItemContract.ItemEntry.COLUMN_CHECKED + " = \'true\' "
+                        + "WHERE " + ItemContract.ItemEntry.COLUMN_NAME + " = "
+                        + "\'" + viewHolder.getmName() + "\'";
+                db.execSQL(update);
+            }
+        }
+        getSupportLoaderManager().restartLoader(ITEM_LOADER_ID, null, MainActivity.this);
     }
 
     /**

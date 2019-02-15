@@ -163,6 +163,7 @@ public class AddItemActivity extends AppCompatActivity {
             ContentValues values = new ContentValues();
             values.put(ItemContract.ItemEntry.COLUMN_NAME, name);
             values.put(ItemContract.ItemEntry.COLUMN_AREA, area);
+            values.put(ItemContract.ItemEntry.COLUMN_CHECKED, false);
             long key = 0;
             try {
                 key = db.insert(ItemContract.ItemEntry.TABLE_NAME, null, values);
